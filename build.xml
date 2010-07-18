@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Spd" default="makedoc">
+	
+	<target name="cleardoc">
+		<delete dir="./doc" />
+		<mkdir dir="./doc" />
+	</target>
+	
+	<target name="makedoc" depends="cleardoc">
+		<phpdoc title="API Documentation"
+			destdir="./doc"
+			sourcecode="false"
+			output="HTML:Smarty:PHP"
+		>
+				<fileset dir="./source">
+					<include name="**/*.php" />
+				</fileset>
+		</phpdoc>
+	</target>
+	
+	<target name="test">
+		<phpunit 
+			haltonerror="true"
+			haltonfailure="true"
+			printsummary="false"
+		>
+			<formatter usefile="false" type="plain" />
+			<batchtest>
+				<fileset dir="./source/test">
+					<include name="**/*Test*.php" />
+				</fileset>
+			</batchtest>
+		</phpunit>
+	</target>
+		
+</project>
